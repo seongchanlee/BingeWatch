@@ -60,11 +60,17 @@ public class MessageHandler extends ListenerAdapter {
 
             case Commands.REMOVE_SHOW:
                 if (showName != null) {
-                    showManager.removeShow(showName);
-                    LOGGER.info(toTitleCase(showName) + " removed by " + event.getAuthor().getName());
-                    event.getChannel()
-                            .sendMessage("Show successfully removed!")
-                            .queue();
+                    if (showManager.containsShow(showName)) {
+                        showManager.removeShow(showName);
+                        LOGGER.info(toTitleCase(showName) + " removed by " + event.getAuthor().getName());
+                        event.getChannel()
+                                .sendMessage("Show successfully removed!")
+                                .queue();
+                    } else {
+                        event.getChannel()
+                                .sendMessage("Show with given name does not exist.")
+                                .queue();
+                    }
                 } else {
                     event.getChannel()
                             .sendMessage("Please check the format for the command.")
@@ -158,6 +164,7 @@ public class MessageHandler extends ListenerAdapter {
                         .flatMap(channel ->
                                 channel.sendMessage("Check https://github.com/seongchanlee/BingeWatch/blob/master/COMMANDS.md"))
                         .queue();
+                break;
         }
     }
 }
