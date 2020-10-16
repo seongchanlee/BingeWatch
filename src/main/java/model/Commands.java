@@ -9,4 +9,5 @@ public final class Commands {
     public static final String ADD_FILLERS = "addFillers";
     public static final String NEXT_EPISODE = "nextEpisode";
     public static final String GET_LIST = "getList";
+    public static final String HELP = "help";
 }

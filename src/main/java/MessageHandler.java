@@ -151,6 +151,13 @@ public class MessageHandler extends ListenerAdapter {
                             .sendMessage("There are no show added.")
                             .queue();
                 }
+                break;
+
+            case Commands.HELP:
+                event.getAuthor().openPrivateChannel()
+                        .flatMap(channel ->
+                                channel.sendMessage("Check https://github.com/seongchanlee/BingeWatch/blob/master/COMMANDS.md"))
+                        .queue();
         }
     }
 }
